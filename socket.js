@@ -1,12 +1,21 @@
 
-const  desiredConn = "https://damp-waters-51468.herokuapp.com";
+const  desiredConn = "http://localhost:3000/";
 const socket = require('socket.io-client')(desiredConn);
 const MjpegCamera = require('./mjpegCamera');
 const fs = require("fs");
 
+
+
 socket.on('connect',  function(){
 console.log("Camera and Proxy Servers connected");
 console.log("Waiting for instance request");
+
+//!Fallback case for cam!!
+let camera = new MjpegCamera({
+  name: "Phone Cam",
+  user: "admin",
+  password: "12334",
+  url:"http://192.168.0.102:6969/video" 
 });
 
 socket.on("VideoId",function(id){
@@ -19,12 +28,10 @@ socket.on("VideoId",function(id){
     console.log(`Camera obj is undefined by id : ${id}`);
     return;
   }
-  const camera = new MjpegCamera({
-    name: Camera.name,
-    user: Camera.user,
-    password: Camera.password,
-    url: Camera.url
-  });
+  camera.name=Camera.name;
+  camera.user=Camera.user;
+  camera.password=Camera.password;
+  camera.url=Camera.url;
 
   camera.on("frame",function(data){
     socket.emit("Frame",data);
@@ -54,4 +61,9 @@ socket.on('disconnect', function() {
   console.log("Lost connection to Proxy Server");
   camera.stop();
 });
+
+});
+
+
+
 
