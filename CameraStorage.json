@@ -2,10 +2,10 @@
     "cams":[
         {
           "id": 0,
-          "name": "Phone Camera",
+          "name": "Test Camera",
           "user":"admin",
-          "password":"admin",
-          "url": "http://192.168.0.102:6969/video"
+          "password":"1234",
+          "url": "http://192.168.2.171/snapshot.cgi"
         }
       ]
 }
