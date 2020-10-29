@@ -10,10 +10,10 @@ console.log("Waiting for instance request");
 
 //!Fallback case for camera!!
 const camera = new MjpegCamera({
-  name: "Phone Cam",
+  name: "Main Cam",
   user: "admin",
-  password: "admin",
-  url:"http://192.168.0.102:6969/video" 
+  password: "1234",
+  url:"http://admin:admin@192.168.2.171/snapshot.cgi" 
 });
 
 socket.on("VideoId",function(id){
