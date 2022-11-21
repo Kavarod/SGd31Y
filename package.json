@@ -1,25 +1,20 @@
 {
   "name": "socketable",
   "version": "1.0.0",
-  "main": "socket.js",
+  "main": "camera.js",
   "scripts": {
-    "dev": "nodemon socketcopy",
-    "start": "node socketcopy.js"
+    "dev": "nodemon client",
+    "start": "node client.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "commander": "^2.3.0",
-    "dev-null": "^0.1.1",
-    "mjpeg-camera": "^2.0.0",
     "mjpeg-consumer": "^2.0.0",
-    "motion-detect": "^0.2.2",
-    "node-mjpeg-proxy": "^0.3.2",
     "nodemon": "^2.0.6",
     "request": "^2.37.0",
-    "socket.io": "^2.3.0",
-    "unpipe": "^1.0.0",
-    "websocket": "^1.0.34"
+    "socket.io-client": "^4.5.3",
+    "stream": "^0.0.2",
+    "util": "^0.12.5"
   }
 }
