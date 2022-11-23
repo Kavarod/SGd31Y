@@ -7,7 +7,6 @@ const MjpegConsumer = require("./MjpegConsumer");
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
 //http://localhost:3000
-
 const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	transportOptions: {
 		polling: {
@@ -19,14 +18,20 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 });
 
 socket.on("connect", () => {
-	console.log("Client connected."+ " at " +new Date(Date.now()).toUTCString()+"\n");
+	console.log(
+		"Client connected" + " @ " + new Date(Date.now()).toUTCString() + "\n"
+	);
 });
 
-socket.on("disconnect", () => {
-	console.log("\nClient disconnected."+ " at " +new Date(Date.now()).toUTCString()+"\n");
+socket.on("disconnect", (reason) => {
+	console.log(
+		"\n Client disconnected" + " @ " + new Date(Date.now()).toUTCString()
+	);
+	if (reason) {
+		console.log("Reason for disconnection: " + reason);
+	}
 	//Try to reconnect.
 	socket.connect();
-	console.log("Trying to reconnect....");
 });
 
 //! Key App state.
@@ -75,6 +80,12 @@ socket.on("validId", (id) => {
 	camerarequests[id] = camerarequest;
 });
 
+//* Does not allow the socket to timeout.
+socket.on("wakey-wakey", () => {
+	console.log("wake up call reseved.");
+});
+
+//* When the user wants to end the current camera stream.
 socket.on("terminate", (id) => {
 	if (camerarequests[id]) {
 		camerarequests[id].end();
