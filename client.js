@@ -9,7 +9,7 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	transportOptions: {
 		polling: {
 			extraHeaders: {
-				Authorization: "Bearer Infinno#Bathomatic123",
+				Authorization: "Bearer Infinno#Bathomatic423",
 			},
 		},
 	},
@@ -36,11 +36,6 @@ const CamData = JSON.parse(
 socket.on("validId", (id) => {
 	// holds the current connection to active camera.
 	let camerarequest = null;
-
-	if (camerarequests[id] != null) {
-		socket.emit("error", `Error: Camera with id ${id} already in use.`, id);
-		return;
-	}
 
 	const consumer = new MjpegConsumer();
 	const Camera = CamData[id];
