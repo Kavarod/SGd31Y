@@ -19,11 +19,11 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 });
 
 socket.on("connect", () => {
-	console.log("Client connected. \n");
+	console.log("Client connected."+ " at " +new Date(Date.now()).toUTCString()+"\n");
 });
 
 socket.on("disconnect", () => {
-	console.log("\nClient disconnected.");
+	console.log("\nClient disconnected."+ " at " +new Date(Date.now()).toUTCString()+"\n");
 	//Try to reconnect.
 	socket.connect();
 	console.log("Trying to reconnect....");
