@@ -5,6 +5,9 @@ const request = require("request");
 const MjpegConsumer = require("./MjpegConsumer");
 
 //* connect to socket with Auth Token.
+//https://nameless-hollows-47413.herokuapp.com
+//http://localhost:3000
+
 const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	transportOptions: {
 		polling: {
@@ -16,13 +19,14 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 });
 
 socket.on("connect", () => {
-	console.log("Client connected.");
+	console.log("Client connected. \n");
 });
 
 socket.on("disconnect", () => {
-	console.log("Client disconnected.");
+	console.log("\nClient disconnected.");
 	//Try to reconnect.
 	socket.connect();
+	console.log("Trying to reconnect....");
 });
 
 //! Key App state.
@@ -44,6 +48,7 @@ socket.on("validId", (id) => {
 		socket.emit("error", `Error: Camera with id ${id} can not be found.`, id);
 		return;
 	}
+	console.log("\n");
 	console.log("camera is validly choosen.");
 
 	//? http://mjpeg.sanford.io/count.mjpeg
