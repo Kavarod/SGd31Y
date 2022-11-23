@@ -30,27 +30,26 @@ socket.on("disconnect", () => {
 let camerarequests = [null, null, null, null, null, null];
 //* Read JSON data once!
 const CamData = JSON.parse(
-	fs.readFileSync("./cameraStorage.json", "utf-8")
+	fs.readFileSync("./CameraStorage.json", "utf-8")
 ).cams;
 
 socket.on("validId", (id) => {
-
 	// holds the current connection to active camera.
 	let camerarequest = null;
 
-	if(camerarequests[id]!=null){
+	if (camerarequests[id] != null) {
 		socket.emit("error", `Error: Camera with id ${id} already in use.`, id);
 		return;
 	}
-	console.log("Client has been given a valid id.");
-	const consumer = new MjpegConsumer();
 
+	const consumer = new MjpegConsumer();
 	const Camera = CamData[id];
 
 	if (Camera == undefined) {
 		socket.emit("error", `Error: Camera with id ${id} can not be found.`, id);
 		return;
 	}
+	console.log("camera is validly choosen.");
 
 	//? http://mjpeg.sanford.io/count.mjpeg
 	camerarequest = request(Camera.url)
@@ -65,7 +64,7 @@ socket.on("validId", (id) => {
 			return null;
 		})
 		.on("response", () => {
-			console.log("Request is possible, writting response headers.");
+			console.log("camera started.");
 			socket.emit("response", id);
 		})
 		.pipe(consumer)
@@ -77,8 +76,8 @@ socket.on("validId", (id) => {
 });
 
 socket.on("terminate", (id) => {
-	if (camerarequests.at(id)) {
-		camerarequests.at(id).end();
+	if (camerarequests[id]) {
+		camerarequests[id].end();
 		camerarequests[id] = null;
 		console.log("camera terminated.");
 	}
