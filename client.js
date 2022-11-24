@@ -15,11 +15,14 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 			},
 		},
 	},
+	reconnection: true,
+	reconnectionDelay: 1000,
+	reconnectionDelayMax: 5000,
+	reconnectionAttempts: 99999,
 });
 
 socket.on("connect", () => {
-	console.log(
-		"Client connected" + " @ " + new Date(Date.now()).toUTCString());
+	console.log(" Client connected" + " @ " + new Date(Date.now()).toUTCString());
 });
 
 socket.on("disconnect", (reason) => {
@@ -81,7 +84,7 @@ socket.on("validId", (id) => {
 
 //* Does not allow the socket to timeout.
 socket.on("wakey-wakey", () => {
-	console.log("wake up call reseved.");
+	console.log("Wake up call.");
 });
 
 //* When the user wants to end the current camera stream.
