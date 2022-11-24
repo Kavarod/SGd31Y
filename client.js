@@ -15,24 +15,12 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 			},
 		},
 	},
-	reconnection: true,
-	reconnectionDelay: 1000,
-	reconnectionDelayMax: 5000,
-	reconnectionAttempts: 99999,
 });
 
 socket.on("connect", () => {
 	console.log(
 		"\nClient connected" + " @ " + new Date(Date.now()).toUTCString()
 	);
-	const consumer = new MjpegConsumer();
-	setInterval(()=>{
-		request("http://mjpeg.sanford.io/count.mjpeg")
-		.pipe(consumer)
-		.on("data", (content) => {
-			socket.emit("connection-pipe", content);
-		});
-	},2*60*1000);
 });
 
 socket.on("disconnect", (reason) => {
