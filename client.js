@@ -7,16 +7,12 @@ const MjpegConsumer = require("./MjpegConsumer");
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
 //http://localhost:3000
-const socket = io("https://nameless-hollows-47413.herokuapp.com");
-/*
-	transportOptions: {
-		polling: {
-			extraHeaders: {
-				Authorization: "Bearer Infinno#Bathomatic423",
-			},
-		},
-	},
-	*/
+const socket = io("ws://nameless-hollows-47413.herokuapp.com", {
+	auth: {
+		token: "Bearer Infinno#Bathomatic423"
+	  }
+});
+
 socket.on("connect", () => {
 	console.log(
 		"\nClient connected" + " @ " + new Date(Date.now()).toUTCString()
@@ -30,7 +26,7 @@ socket.on("disconnect", (reason) => {
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
 	}
-	//Try to reconnect.
+	//Try to reconnect manually.
 	socket.connect();
 });
 
