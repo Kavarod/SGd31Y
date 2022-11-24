@@ -22,7 +22,9 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 });
 
 socket.on("connect", () => {
-	console.log(" Client connected" + " @ " + new Date(Date.now()).toUTCString());
+	console.log(
+		"\nClient connected" + " @ " + new Date(Date.now()).toUTCString()
+	);
 });
 
 socket.on("disconnect", (reason) => {
@@ -31,11 +33,13 @@ socket.on("disconnect", (reason) => {
 	);
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
-		if (reason == "ping timeout") {
+		if (reason == "ping timeout" || reason == "transport close") {
 			socketConnectTimeInterval = setInterval(function () {
 				socket.socket.reconnect();
-				if(socket.socket.connected) {clearInterval(socketConnectTimeInterval);}
-			  }, 2000);
+				if (socket.socket.connected) {
+					clearInterval(socketConnectTimeInterval);
+				}
+			}, 2000);
 		}
 	}
 	//Try to reconnect.
@@ -61,7 +65,6 @@ socket.on("validId", (id) => {
 		socket.emit("error", `Error: Camera with id ${id} can not be found.`, id);
 		return;
 	}
-	console.log("\n");
 	console.log("camera is validly choosen.");
 
 	//? http://mjpeg.sanford.io/count.mjpeg
@@ -93,6 +96,6 @@ socket.on("terminate", (id) => {
 	if (camerarequests[id]) {
 		camerarequests[id].end();
 		camerarequests[id] = null;
-		console.log("camera terminated.");
+		console.log("camera terminated. \n");
 	}
 });
