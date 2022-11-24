@@ -7,7 +7,8 @@ const MjpegConsumer = require("./MjpegConsumer");
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
 //http://localhost:3000
-const socket = io("https://nameless-hollows-47413.herokuapp.com", {
+const socket = io("https://nameless-hollows-47413.herokuapp.com");
+/*
 	transportOptions: {
 		polling: {
 			extraHeaders: {
@@ -15,8 +16,7 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 			},
 		},
 	},
-});
-
+	*/
 socket.on("connect", () => {
 	console.log(
 		"\nClient connected" + " @ " + new Date(Date.now()).toUTCString()
@@ -91,5 +91,4 @@ socket.on("terminate", (id) => {
 //* Prevents the client socket from timeing out.
 socket.on("ping", function (data) {
 	socket.emit("pong", { beat: 1 });
-	console.log("pong emitted");
 });
