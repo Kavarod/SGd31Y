@@ -31,6 +31,12 @@ socket.on("disconnect", (reason) => {
 	);
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
+		if (reason == "ping timeout") {
+			socketConnectTimeInterval = setInterval(function () {
+				socket.socket.reconnect();
+				if(socket.socket.connected) {clearInterval(socketConnectTimeInterval);}
+			  }, 2000);
+		}
 	}
 	//Try to reconnect.
 	socket.connect();
@@ -80,11 +86,6 @@ socket.on("validId", (id) => {
 		});
 
 	camerarequests[id] = camerarequest;
-});
-
-//* Does not allow the socket to timeout.
-socket.on("wakey-wakey", () => {
-	console.log("Wake up call.");
 });
 
 //* When the user wants to end the current camera stream.
