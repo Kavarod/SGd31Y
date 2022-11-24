@@ -19,7 +19,6 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	reconnectionDelay: 1000,
 	reconnectionDelayMax: 5000,
 	reconnectionAttempts: 99999,
-	forceNew: true,
 });
 
 socket.on("connect", () => {
