@@ -19,28 +19,29 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	reconnectionDelay: 1000,
 	reconnectionDelayMax: 5000,
 	reconnectionAttempts: 99999,
+	forceNew: true,
 });
 
 socket.on("connect", () => {
 	console.log(
 		"\nClient connected" + " @ " + new Date(Date.now()).toUTCString()
 	);
+	const consumer = new MjpegConsumer();
+	setInterval(()=>{
+		request("http://mjpeg.sanford.io/count.mjpeg")
+		.pipe(consumer)
+		.on("data", (content) => {
+			socket.emit("connection-pipe", content);
+		});
+	},2*60*1000);
 });
 
 socket.on("disconnect", (reason) => {
 	console.log(
-		"\n Client disconnected" + " @ " + new Date(Date.now()).toUTCString()
+		"\nClient disconnected" + " @ " + new Date(Date.now()).toUTCString()
 	);
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
-		if (reason == "ping timeout" || reason == "transport close") {
-			socketConnectTimeInterval = setInterval(function () {
-				socket.connect();
-				if (socket.connected) {
-					clearInterval(socketConnectTimeInterval);
-				}
-			}, 2000);
-		}
 	}
 	//Try to reconnect.
 	socket.connect();
