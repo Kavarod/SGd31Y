@@ -15,6 +15,11 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 			},
 		},
 	},
+	forceNew: false,
+	reconnection: true,
+	reconnectionDelay: 1000,
+	reconnectionDelayMax: 4000,
+	reconnectionAttempts: Infinity,
 });
 
 socket.on("connect", () => {
@@ -86,4 +91,40 @@ socket.on("terminate", (id) => {
 		camerarequests[id] = null;
 		console.log("camera terminated. \n");
 	}
+});
+
+socket.on('connect_error', function(error){
+	console.log('connection error: ' + error);
+}); 
+
+socket.on('connect_timeout', function(){
+	console.log('connection timeout');
+});
+
+socket.on('reconnect', function(){
+	console.log('reconnect');
+});
+
+socket.on('reconnect_attempt', function(){
+	console.log('reconnect attempt');
+});
+
+socket.on('reconnect_failed', function(){
+	console.log('reconnect_failed');
+});
+
+socket.on('reconnect_error', function(){
+	console.log('reconnect_error');
+});
+
+socket.on('reconnecting', function(){
+	console.log('reconnecting');
+});
+
+socket.on('ping', function(){
+	console.log('ping');
+});
+
+socket.on('pong', function(ms){
+	console.log('pong ' + ms + "ms");
 });
