@@ -19,8 +19,7 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 
 socket.on("connect", () => {
 	console.log(
-		"Client connected" + " @ " + new Date(Date.now()).toUTCString() + "\n"
-	);
+		"Client connected" + " @ " + new Date(Date.now()).toUTCString());
 });
 
 socket.on("disconnect", (reason) => {
