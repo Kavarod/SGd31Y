@@ -35,7 +35,7 @@ socket.on("disconnect", (reason) => {
 		console.log("Reason for disconnection: " + reason);
 		if (reason == "ping timeout" || reason == "transport close") {
 			socketConnectTimeInterval = setInterval(function () {
-				socket.reconnect();
+				socket.connect();
 				if (socket.connected) {
 					clearInterval(socketConnectTimeInterval);
 				}
