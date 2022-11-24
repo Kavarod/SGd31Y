@@ -10,7 +10,11 @@ const MjpegConsumer = require("./MjpegConsumer");
 const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	auth: {
 		token: "Bearer Infinno#Bathomatic423"
-	  }
+	  },
+	  timeout:60000,
+	  pingTimeout:180000,
+	  transports: ["websocket"],
+	  autoConnect: true
 });
 
 socket.on("connect", () => {
