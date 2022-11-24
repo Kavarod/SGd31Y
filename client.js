@@ -7,11 +7,7 @@ const MjpegConsumer = require("./MjpegConsumer");
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
 //http://localhost:3000
-const socket = io("ws://nameless-hollows-47413.herokuapp.com", {
-	auth: {
-		token: "Bearer Infinno#Bathomatic423"
-	  }
-});
+const socket = io("ws://nameless-hollows-47413.herokuapp.com");
 
 socket.on("connect", () => {
 	console.log(
