@@ -79,8 +79,17 @@ socket.on("validId", (id) => {
 	camerarequests[id] = camerarequest;
 });
 
-const pingtime = 8000;
+//* When the user wants to end the current camera stream.
+socket.on("terminate", (id) => {
+	if (camerarequests[id]) {
+		camerarequests[id].end();
+		camerarequests[id] = null;
+		console.log("camera terminated. \n");
+	}
+});
 
+//Every 10 seconds.
+const pingtime = 10000;
 /**
  * Helper function for sending pings to the client socket.
  */
@@ -91,16 +100,7 @@ function sendHeartbeat() {
 //*Prevents the client socket from timeout.
 setTimeout(sendHeartbeat, pingtime);
 
-//* When the user wants to end the current camera stream.
-socket.on("terminate", (id) => {
-	if (camerarequests[id]) {
-		camerarequests[id].end();
-		camerarequests[id] = null;
-		console.log("camera terminated. \n");
-	}
-});
-
 //* Prevents the client socket from timeing out.
 socket.on("pong", function (data) {
-	//Dont pollute the console with pings.
+	//Don't pollute the console with pings.
 });
