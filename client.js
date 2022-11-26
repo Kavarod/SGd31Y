@@ -14,7 +14,7 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	transports: ["websocket"],
 	timeout: 35000,
 	pingTimeout: 180000,
-	reconnectionDelayMax:3000
+	reconnectionDelayMax: 3000,
 });
 
 socket.on("connect", () => {
@@ -79,7 +79,6 @@ socket.on("validId", (id) => {
 	camerarequests[id] = camerarequest;
 });
 
-
 const pingtime = 8000;
 
 /**
@@ -103,5 +102,5 @@ socket.on("terminate", (id) => {
 
 //* Prevents the client socket from timeing out.
 socket.on("pong", function (data) {
-	console.log("pong.");
+	//Dont pollute the console with pings.
 });
