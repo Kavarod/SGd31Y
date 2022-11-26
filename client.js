@@ -87,7 +87,7 @@ const pingtime = 8000;
  */
 function sendHeartbeat() {
 	setTimeout(sendHeartbeat, pingtime);
-	scoket.emit("ping", { beat: 1 });
+	socket.emit("ping", { beat: 1 });
 }
 //*Prevents the client socket from timeout.
 setTimeout(sendHeartbeat, pingtime);
