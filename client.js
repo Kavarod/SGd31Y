@@ -3,6 +3,7 @@ const io = require("socket.io-client");
 const request = require("request");
 //Local camera jpeg consumer library.
 const MjpegConsumer = require("./MjpegConsumer");
+const restart = require("./restart");
 
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
@@ -15,6 +16,7 @@ const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	timeout: 35000,
 	pingTimeout: 180000,
 	reconnectionDelayMax: 3000,
+	reconnect: false,
 });
 
 socket.on("connect", () => {
@@ -30,8 +32,8 @@ socket.on("disconnect", (reason) => {
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
 	}
-	//Try to reconnect manually.
-	socket.connect();
+	//Try to reconnect manually by restating.
+	setTimeout(restart, 1000);
 });
 
 //! Key App state.
