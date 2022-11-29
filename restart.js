@@ -11,7 +11,7 @@ function restart() {
 			detached: true,
 			stdio: "inherit",
 		});
-		console.log("App is restarting....");
+		console.log("\n");
 	});
 	process.exit();
 }

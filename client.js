@@ -3,11 +3,11 @@ const io = require("socket.io-client");
 const request = require("request");
 //Local camera jpeg consumer library.
 const MjpegConsumer = require("./MjpegConsumer");
+// Local restart function.
 const restart = require("./restart");
 
 //* connect to socket with Auth Token.
 //https://nameless-hollows-47413.herokuapp.com
-//http://localhost:3000
 const socket = io("https://nameless-hollows-47413.herokuapp.com", {
 	auth: {
 		token: "Bearer Infinno#Bathomatic423",
@@ -32,13 +32,14 @@ socket.on("disconnect", (reason) => {
 	if (reason) {
 		console.log("Reason for disconnection: " + reason);
 	}
-	//Try to reconnect manually by restating.
+	//Try to reconnect manually by restating the proccess.
 	setTimeout(restart, 1000);
 });
 
-//! Key App state.
+//* Key app state.
 //Holds all camera connections + 1 buffer.
 let camerarequests = [null, null, null, null, null, null];
+
 //* Read JSON data once!
 const CamData = JSON.parse(
 	fs.readFileSync("./CameraStorage.json", "utf-8")
@@ -93,7 +94,7 @@ socket.on("terminate", (id) => {
 //Every 10 seconds.
 const pingtime = 10000;
 /**
- * Helper function for sending pings to the client socket.
+ * Helper function for sending pings every 10 seconds to the client socket.
  */
 function sendHeartbeat() {
 	setTimeout(sendHeartbeat, pingtime);
