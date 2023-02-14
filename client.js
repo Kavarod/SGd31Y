@@ -2,7 +2,7 @@ const fs = require("fs");
 const io = require("socket.io-client");
 const request = require("request");
 //Local camera jpeg consumer library.
-const MjpegConsumer = require("./MjpegConsumer");
+const MjpegConsumer = require("./MjpegConsumerNew");
 // Local restart function.
 const restart = require("./restart");
 
