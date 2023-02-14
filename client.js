@@ -7,8 +7,7 @@ const MjpegConsumer = require("./MjpegConsumerNew");
 const restart = require("./restart");
 
 //* connect to socket with Auth Token.
-//https://nameless-hollows-47413.herokuapp.com
-const socket = io("https://nameless-hollows-47413.herokuapp.com", {
+const socket = io("https://bathomatic-proxy.herokuapp.com", {
 	auth: {
 		token: "Bearer Infinno#Bathomatic423",
 	},
