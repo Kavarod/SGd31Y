@@ -90,20 +90,3 @@ socket.on("terminate", (id) => {
 		console.log("camera terminated. \n");
 	}
 });
-
-//Every 10 seconds.
-const pingtime = 10000;
-/**
- * Helper function for sending pings every 10 seconds to the client socket.
- */
-function sendHeartbeat() {
-	setTimeout(sendHeartbeat, pingtime);
-	socket.emit("ping", { beat: 1 });
-}
-//*Prevents the client socket from timeout.
-setTimeout(sendHeartbeat, pingtime);
-
-//* Prevents the client socket from timeing out.
-socket.on("pong", function (data) {
-	//Don't pollute the console with pings.
-});

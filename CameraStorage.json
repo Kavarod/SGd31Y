@@ -2,34 +2,27 @@
     "cams":[
         {
           "id":0,
-          "url":"http://192.168.2.172/snapshot.cgi",
-          "name":"Camera 2 ",
-          "host":"192.168.2.x"
+          "url":"http://admin:1234@192.168.222.171/snapshot.cgi"
       },
-
       {
         "id":1,
-        "url":"http://192.168.2.173/snapshot.cgi",
-        "name":"Camera 3",
-        "host":"192.168.2.x"
+        "url":"http://admin:1234@192.168.2.172/snapshot.cgi"
     },
     {
       "id":2,
-      "url":"http://admin:1234@192.168.2.174/snapshot.cgi",
-      "name":"Camera 4",
-      "host":"192.168.2.x"
+      "url":"http://admin:1234@192.168.2.173/snapshot.cgi"
      },
     {
       "id": 3,
-      "url": "http://192.168.2.175/snapshot.cgi",
-      "name": "Camera 5",
-      "host": "192.168.2.x"
+      "url": "http://admin:1234@192.168.2.174/snapshot.cgi"
     }, 
      {
       "id":4,
-      "url":"http://admin:1234@192.168.2.176/snapshot.cgi",
-      "name":"Camera 6",
-      "host":"192.168.2.x"
+      "url":"http://admin:1234@192.168.2.178/snapshot.cgi"
+     },
+          {
+      "id":5,
+      "url":"http://admin:1234@192.168.2.179/snapshot.cgi"
      }
   ]
 }
